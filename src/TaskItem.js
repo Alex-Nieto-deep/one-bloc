@@ -1,4 +1,5 @@
 import React from 'react';
+import './TaskItem.css'
 
 function TaskItem(props) {
   return (
