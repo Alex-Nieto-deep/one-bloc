@@ -2,17 +2,11 @@ import React from 'react';
 import './TaskItem.css'
 
 function TaskItem(props) {
-  const onComplete = () => {
-    alert('Se completo la tarea ' + props.text);
-  };
 
-  const onDelete = () => {
-    alert('Se elimino la tarea ' + props.text);
-  }
   return (
     <li className="TaskItem">
     <span className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
-      onClick={onComplete}
+      onClick={props.onCompleted}
       >
       √
     </span>
@@ -20,7 +14,7 @@ function TaskItem(props) {
       {props.text}
     </p>
     <span className="Icon Icon-delete"
-      onClick={onDelete}
+      onClick={props.onDeleted}
       >
       X
     </span>
