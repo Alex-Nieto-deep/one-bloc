@@ -10,29 +10,57 @@ import {AppIU} from './AppUI'
 // ];
 
 function useLocalStorage(itemName, initialValue) {
-  const localStorageItem = localStorage.getItem(itemName);
-  let parsedItem;
+  const [error, setError] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [item, setItem] = React.useState(initialValue);
+  
+  React.useEffect(() => {
+    setTimeout(() => {
+      try {
+        const localStorageItem = localStorage.getItem(itemName);
+        let parsedItem;
+        
+        if (!localStorageItem) {
+          localStorage.setItem(itemName, JSON.stringify(initialValue));
+          parsedItem = initialValue;
+        } else {
+          parsedItem = JSON.parse(localStorageItem);
+        }
 
-  if(!localStorageItem) {
-    localStorage.setItem(itemName, JSON.stringify(initialValue))
-    parsedItem = initialValue;
-  } else {
-    parsedItem = JSON.parse(localStorageItem);
-  }
-
-  const [item, setItem] = React.useState(parsedItem);
-
+        setItem(parsedItem);
+        setLoading(false);
+      } catch(error) {
+        setError(error);
+      }
+    }, 1000);
+  });
+  
   const saveItem = (newItem) => {
-    const stringifyItem = JSON.stringify(newItem);
-    localStorage.setItem(itemName, stringifyItem);
-    setItem(newItem);
-  }
+    try {
+      const stringifiedItem = JSON.stringify(newItem);
+      localStorage.setItem(itemName, stringifiedItem);
+      setItem(newItem);
+    } catch(error) {
+      setError(error);
+    }
+  };
 
-  return [item, saveItem];
+  return {
+    item,
+    saveItem,
+    loading,
+    error,
+  };
 }
 
+
 function App() {
-  const [tasks, saveTasks] = useLocalStorage('TASKS_V1', []);
+  const {
+    item: tasks,
+    saveItem: saveTasks,
+    loading,
+    error,
+  } = useLocalStorage('TASKS_V1', []);
 
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -41,7 +69,7 @@ function App() {
 
   let searchedTasks = [];
 
-  if(!searchValue >= 1) {
+  if(!searchValue.length >= 1) {
     searchedTasks = tasks;
   } else {
     searchedTasks = tasks.filter(task => {
@@ -68,6 +96,8 @@ function App() {
 
   return (
     <AppIU
+      loading={loading}
+      error={error}
       completedTasks={completedTasks}
       totalTasks={totalTasks}
       searchValue={searchValue}
