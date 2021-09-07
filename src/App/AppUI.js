@@ -6,6 +6,8 @@ import {TaskItem} from '../TaskItem'
 import {CreateTaskButton} from '../CreateTaskButton'
 
 function AppIU({
+  loading,
+  error,
   completedTasks,
   totalTasks,
   searchValue,
@@ -26,6 +28,11 @@ function AppIU({
       />
 
       <TaskList>
+      { error && <p>tranquilo, vuelve a cargar la pagina</p>}
+      { loading && <p>Estamos cargando, un momento por favor</p>}
+      { (!loading && !searchedTasks.length) && <p>Crea tu primera tarea</p>}
+
+
         {searchedTasks.map(task => (
           <TaskItem
             key={task.text}
