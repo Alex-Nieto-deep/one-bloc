@@ -5,11 +5,14 @@ import {TaskList} from '../TaskList'
 import {TaskItem} from '../TaskItem'
 import {CreateTaskButton} from '../CreateTaskButton'
 import { TaskContext } from '../TaskContext'
+import { Modal } from '../Modal'
 
 
 function AppIU() {
 
-  const {error, loading, searchedTasks, toggleCompleteTask, deleteTask} = React.useContext(TaskContext);
+  const {
+    error, loading, searchedTasks, toggleCompleteTask,
+    deleteTask, openModal, setOpenModal } = React.useContext(TaskContext);
 
   return (
     <React.Fragment>
@@ -32,8 +35,15 @@ function AppIU() {
             />
           ))}
           </TaskList>
-
-      <CreateTaskButton />
+          {openModal && (
+            <Modal>
+              <p>{searchedTasks[0].text}</p>
+            </Modal>
+          )}
+      <CreateTaskButton
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </React.Fragment>
   );
 }

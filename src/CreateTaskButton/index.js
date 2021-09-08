@@ -1,9 +1,9 @@
 import React from 'react';
 import './CreateTaskButton.css'
 
-function CreateTaskButton(prop) {
+function CreateTaskButton(props) {
   const onClickButton = () => {
-    alert('Aca deber ir el nodal');
+    props.setOpenModal(!props.openModal);
   }
   return (
     <button
