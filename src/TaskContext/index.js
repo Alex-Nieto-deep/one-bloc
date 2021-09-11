@@ -31,6 +31,14 @@ function TaskProvider(props) {
     })
   }
 
+  const addTask = (text) => {
+    const newTasks = [...tasks];
+    newTasks.push({
+      completed: false,
+      text,
+    })
+    saveTasks(newTasks);
+  }
 
   const toggleCompleteTask = (text) => {
     const indexTask = tasks.findIndex(task => task.text === text);
@@ -57,6 +65,7 @@ function TaskProvider(props) {
       searchedTasks,
       toggleCompleteTask,
       deleteTask,
+      addTask,
       openModal,
       setOpenModal,
     }}>

@@ -3,7 +3,7 @@ import './CreateTaskButton.css'
 
 function CreateTaskButton(props) {
   const onClickButton = () => {
-    props.setOpenModal(!props.openModal);
+    props.setOpenModal(prevState => !prevState);
   }
   return (
     <button

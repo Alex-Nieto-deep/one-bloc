@@ -6,6 +6,7 @@ import {TaskItem} from '../TaskItem'
 import {CreateTaskButton} from '../CreateTaskButton'
 import { TaskContext } from '../TaskContext'
 import { Modal } from '../Modal'
+import { TaskForm } from '../TaskForm'
 
 
 function AppIU() {
@@ -37,7 +38,7 @@ function AppIU() {
           </TaskList>
           {openModal && (
             <Modal>
-              <p>{searchedTasks[0].text}</p>
+              <TaskForm />
             </Modal>
           )}
       <CreateTaskButton

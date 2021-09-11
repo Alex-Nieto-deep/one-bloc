@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+# One-block
+Una aplicacion web funcional con el framework más utilizado de javaScript: React.js. Donde se registra y se guarda las tareas y notas que el usuarios digites, tambien cuenta con la funcionalidad de marcar las seleccionada y borras la que se haya completado
+>>>>>>> 63a66a2b4941f806c3136089e31901dd18753b87
